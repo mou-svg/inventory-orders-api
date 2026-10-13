@@ -97,6 +97,22 @@ namespace InventoryOrders.Api.Controllers
 
         }
 
+        [HttpGet("low-stock")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetLowStockProducts([FromQuery] int minimumStock = 10)
+        {
+            if(minimumStock < 0)
+            {
+                return BadRequest(new
+                {
+                    message = "Minimum stock cannot be negative."
+                });
+            }
+
+            var products = await _context.Products.FromSqlInterpolated($"Exec dbo.GetLowStockProducts @MinimumStock={minimumStock}")
+                .AsNoTracking() .ToListAsync();
+            return Ok(products);
+        }
+
     }
 }
 
