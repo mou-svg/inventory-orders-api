@@ -1,5 +1,6 @@
 ﻿using InventoryOrders.Api.Data;
 using InventoryOrders.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +36,7 @@ namespace InventoryOrders.Api.Controllers
             return Ok(product);
         }
 
+        [Authorize]
         [HttpPost]
 
         public async Task<ActionResult<Product>> CreateProduct(Product product)
@@ -56,6 +58,7 @@ namespace InventoryOrders.Api.Controllers
 
         }
 
+        [Authorize]
         [HttpPut("{id:int}")]
 
         public async Task<IActionResult> UpdateProduct(int id, Product updatedProduct)
@@ -79,6 +82,7 @@ namespace InventoryOrders.Api.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeletProduct(int id)
         {

@@ -1,5 +1,6 @@
 ﻿using InventoryOrders.Api.Data;
 using InventoryOrders.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace InventoryOrders.Api.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpPost]
 
         public async Task<ActionResult<Order>> CreateOrder(Order order)
@@ -66,9 +68,9 @@ namespace InventoryOrders.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var orders = await _context.Orders.AsNoTracking().FirstOrDefaultAsync(p => p.id ==id);
+            var orders = await _context.Orders.AsNoTracking().FirstOrDefaultAsync(p => p.id == id);
 
-            if(orders == null)
+            if (orders == null)
             {
                 return NotFound(new { message = "Order not found." });
 
