@@ -1,0 +1,59 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+@baseurl = http://localhost:5162
+@productId= 1
+@OrderId = 1
+###Get all products
+GET {{baseurl}}/api/products
+Accept: application/json
+###
+
+### Get a product by ID
+GET {{baseurl}}/api/products/{{productId}}
+###
+
+### Negative test: product does not exist
+GET {{baseurl}}/api/products/2147483647
+###
+
+### Get all orders
+GET {{baseurl}}/api/orders
+###
+
+### Get an order by ID
+GET {{baseurl}}/api/orders/{{OrderId}}
+###
+
+### Negative test: order does not exist
+GET {{baseurl}}/api/orders/2147483647
+###
+### Create a product (requires a valid JWT)
+# Replace the placeholder with a valid development token.
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1vdXN1Iiwic3ViIjoibW91c3UiLCJqdGkiOiIzNDE2M2Q3MSIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjUxNjIiLCJodHRwczovL2xvY2FsaG9zdDo3MjY5Il0sIm5iZiI6MTc5MTk0NDExNCwiZXhwIjoxNzk5ODkyOTE0LCJpYXQiOjE3OTE5NDQxMTQsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.o2pbH8kxB3GiPxoDn_owHAoFFI55H1GllPKKuPJFmf8
+
+POST {{baseurl}}/api/products
+Authorization: Bearer {{token}}
+content-type:application/json
+
+{
+  "name": "Test Keyboard",
+  "sku": "KB-MANUAL-001",
+  "price": 49.99,
+  "stockQuantity": 20
+}
+###
+
+### Create an order (requires a valid JWT)
+POST {{baseurl}}/api/orders
+Authorization: Bearer {{token}}
+content-type:application/json
+
+{
+   "productId": {{productId}},
+  "quantity": 2
+}
+
+###

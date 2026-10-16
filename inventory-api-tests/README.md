@@ -1,0 +1,1 @@
+Create a small Java project with REST Assured. Write API tests for the product and order endpoints, and include one negative test for each.
