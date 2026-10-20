@@ -1,4 +1,31 @@
-<Solution>
-  <Project Path="../InventoryOrders.Tests/InventoryOrders.Tests.csproj" Id="6f5bc417-1f76-4dde-96ef-149a589d8d18" />
-  <Project Path="InventoryOrders.Api.csproj" />
-</Solution>
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12224.181 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryOrders.Tests", "..\InventoryOrders.Tests\InventoryOrders.Tests.csproj", "{6F5BC417-1F76-4DDE-96EF-149A589D8D18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryOrders.Api", "InventoryOrders.Api.csproj", "{73490056-2E31-509D-0DE9-EAC3A2248F5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F5BC417-1F76-4DDE-96EF-149A589D8D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5BC417-1F76-4DDE-96EF-149A589D8D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5BC417-1F76-4DDE-96EF-149A589D8D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5BC417-1F76-4DDE-96EF-149A589D8D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73490056-2E31-509D-0DE9-EAC3A2248F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73490056-2E31-509D-0DE9-EAC3A2248F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73490056-2E31-509D-0DE9-EAC3A2248F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73490056-2E31-509D-0DE9-EAC3A2248F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80F7B9ED-58FA-4D52-AE68-C3C7D06E7890}
+	EndGlobalSection
+EndGlobal
