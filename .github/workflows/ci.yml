@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-test:
@@ -30,4 +31,3 @@ jobs:
 
       - name: Run tests
         run: dotnet test InventoryOrders.Tests/InventoryOrders.Tests.csproj --configuration Release
-	
