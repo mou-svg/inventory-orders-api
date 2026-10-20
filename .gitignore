@@ -428,3 +428,5 @@ FodyWeavers.xsd
 
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
+/InventoryOrders.Api/InventoryOrders.Api.slnx
+/InventoryOrders.Tests/InventoryOrders.Tests.slnx
