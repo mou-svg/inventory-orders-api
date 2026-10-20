@@ -28,5 +28,9 @@
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryOrders.Api\InventoryOrders.Api.csproj" />
+  </ItemGroup>
 
 </Project>
