@@ -1,8 +1,11 @@
 using InventoryOrders.Api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -59,6 +62,7 @@ var jwtIssuer = builder.Configuration["Jwt:Issuer"]
 var jwtAudience = builder.Configuration["Jwt:Audience"]
     ?? "InventoryOrders.Client";
 
+
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -87,17 +91,54 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-if(app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+    app.MapPost("/api/auth/login", (LoginRequest request) =>
+       {
+           // Development-only demo credentials
+           if (request.Username != "demo" ||
+               request.Password != "ChangeMe123!")
+           {
+               return Results.Unauthorized();
+           }
+
+           var claims = new[]
+           {
+            new Claim(ClaimTypes.Name, request.Username),
+            new Claim(ClaimTypes.Role, "User")
+       };
+
+           var key = new SymmetricSecurityKey(
+               Encoding.UTF8.GetBytes(jwtSecret));
+
+           var credentials = new SigningCredentials(
+               key,
+               SecurityAlgorithms.HmacSha256);
+
+           var token = new JwtSecurityToken(
+               issuer: jwtIssuer,
+               audience: jwtAudience,
+               claims: claims,
+               expires: DateTime.UtcNow.AddMinutes(30),
+               signingCredentials: credentials);
+
+           return Results.Ok(new
+           {
+               token = new JwtSecurityTokenHandler()
+                   .WriteToken(token),
+               expiresAt = token.ValidTo
+           });
+       });
+//}
+
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.MapOpenApi();
-}
+//}
 
 app.UseHttpsRedirection();
 
@@ -114,3 +155,4 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+public record LoginRequest(string Username, string Password);
